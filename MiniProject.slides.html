@@ -212,6 +212,26 @@ div.output_prompt {
 
 </head>
 
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<style type="text/css">
+//div.output_wrapper {
+//  margin-top: 0px;
+//}
+.input_hidden {
+  display: none;
+//  margin-top: 5px;
+}
+</style>
+
+<script>
+$(document).ready(function(){
+  $(".output_wrapper").click(function(){
+      $(this).prev('.input_hidden').slideToggle();
+  });
+})
+</script>
 <body>
 <div class="reveal">
 <div class="slides">
@@ -284,8 +304,9 @@ Taalgebruik verandert met de tijd</p>
 </div><div style=display:none>
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input_hidden">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -316,9 +337,12 @@ Taalgebruik verandert met de tijd</p>
 </div>
 
 </div>
+
+</div>
     </div><div style=display:none>
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input_hidden">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
@@ -338,9 +362,12 @@ Taalgebruik verandert met de tijd</p>
 </div>
 
 </div>
+
+</div>
     </div><div style=display:none>
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input_hidden">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
@@ -350,6 +377,8 @@ Taalgebruik verandert met de tijd</p>
 
 </div>
 </div>
+</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -374,8 +403,9 @@ Taalgebruik verandert met de tijd</p>
     <section>
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input_hidden">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="k">def</span> <span class="nf">parse_troonrede</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
@@ -400,11 +430,14 @@ Taalgebruik verandert met de tijd</p>
     <span class="k">return</span> <span class="n">troonredes</span>
 
 
-<span class="o">%</span><span class="k">time</span> parsedtroonredes= parse_corpus(&#39;files/*.html&#39;)
+<span class="n">parsedtroonredes</span><span class="o">=</span> <span class="n">parse_corpus</span><span class="p">(</span><span class="s">&#39;files/*.html&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;Troonrede parsing&quot;</span>
 </pre></div>
 
 </div>
 </div>
+</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -413,7 +446,7 @@ Taalgebruik verandert met de tijd</p>
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Wall time: 56.8 s
+<pre>Troonrede parsing
 </pre>
 </div>
 </div>
@@ -426,19 +459,23 @@ Taalgebruik verandert met de tijd</p>
     <section>
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input_hidden">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="k">def</span> <span class="nf">reduce_to_nouns</span><span class="p">(</span><span class="n">parsedcorpus</span><span class="p">):</span>
     <span class="n">nouns_coocuuring_per_paragraph</span><span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span> <span class="n">w</span><span class="o">.</span><span class="n">lemma</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">p</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">nouns</span><span class="p">]))</span>  <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parsedcorpus</span>  <span class="p">]</span>
     <span class="k">return</span> <span class="n">nouns_coocuuring_per_paragraph</span>
 
-<span class="o">%</span><span class="k">time</span> Nounstroonredes= {k:reduce_to_nouns(parsedtroonredes[k]) for k in parsedtroonredes}
+<span class="n">Nounstroonredes</span><span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="n">reduce_to_nouns</span><span class="p">(</span><span class="n">parsedtroonredes</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">parsedtroonredes</span><span class="p">}</span>
+<span class="k">print</span> <span class="s">&quot;Enkelvoudige naamwoorden uit troonredes halen&quot;</span>
 </pre></div>
 
 </div>
 </div>
+</div>
+
 </div>
 
 <div class="output_wrapper">
@@ -447,7 +484,7 @@ Taalgebruik verandert met de tijd</p>
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Wall time: 187 ms
+<pre>Enkelvoudige naamwoorden uit troonredes halen
 </pre>
 </div>
 </div>
@@ -458,6 +495,7 @@ Taalgebruik verandert met de tijd</p>
 </div><div style=display:none>
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input_hidden">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[341]:</div>
 <div class="inner_cell">
@@ -476,9 +514,12 @@ Taalgebruik verandert met de tijd</p>
 </div>
 
 </div>
+
+</div>
     </div><div style=display:none>
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input_hidden">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
@@ -508,57 +549,69 @@ Taalgebruik verandert met de tijd</p>
 </div>
 
 </div>
+
+</div>
     </div></section>
     </section><section>
     <section>
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input_hidden">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">TroonredeNounsVocab</span><span class="p">),</span> 
- <span class="nb">len</span><span class="p">([</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">TroonredeNounsVocab</span> <span class="k">if</span> <span class="n">TroonredeNounsVocab</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">&gt;</span><span class="mi">1</span><span class="p">]),</span>
- <span class="nb">sum</span><span class="p">(</span><span class="n">TroonredeNounsVocab</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> 
- <span class="n">TroonredeNounsVocab</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
- <span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span class="k">print</span> <span class="s">&quot;aantal verschillende enkelvoudige naamwoorden in alle troonredes:&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">TroonredeNounsVocab</span><span class="p">)</span> 
+<span class="k">print</span> <span class="s">&quot;Aantal enkelvoudige naamwoorden die meer dan 1 keer voorkomen:&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">([</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">TroonredeNounsVocab</span> <span class="k">if</span> <span class="n">TroonredeNounsVocab</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">&gt;</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">print</span> <span class="s">&quot;Aantal enkelvoudige naamwoorden in alle troonredes:&quot;</span><span class="p">,</span><span class="nb">sum</span><span class="p">(</span><span class="n">TroonredeNounsVocab</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> 
+<span class="k">print</span> <span class="s">&quot;20 Meest vookomende enkelvoudige naamwoorden:&quot;</span>
+<span class="n">TroonredeNounsVocab</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
+</div>
+
 <div class="output_wrapper">
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>aantal verschillende enkelvoudige naamwoorden in alle troonredes: 6728
+Aantal enkelvoudige naamwoorden die meer dan 1 keer voorkomen: 3262
+Aantal enkelvoudige naamwoorden in alle troonredes: 39090
+20 Meest vookomende enkelvoudige naamwoorden:
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[22]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(6728,
- 3262,
- 39090,
- [(u&apos;regering&apos;, 614),
-  (u&apos;jaar&apos;, 482),
-  (u&apos;den&apos;, 455),
-  (u&apos;land&apos;, 331),
-  (u&apos;maatregel&apos;, 230),
-  (u&apos;ontwikkeling&apos;, 227),
-  (u&apos;nederland&apos;, 222),
-  (u&apos;belang&apos;, 213),
-  (u&apos;aandacht&apos;, 198),
-  (u&apos;wet&apos;, 172),
-  (u&apos;zorg&apos;, 165),
-  (u&apos;verbetering&apos;, 164),
-  (u&apos;staten-generaal&apos;, 163),
-  (u&apos;toestand&apos;, 159),
-  (u&apos;beleid&apos;, 159),
-  (u&apos;edel&apos;, 151),
-  (u&apos;samenwerking&apos;, 148),
-  (u&apos;onderwijs&apos;, 139),
-  (u&apos;deel&apos;, 138),
-  (u&apos;middeel&apos;, 137)])</pre>
+<pre>[(u&apos;regering&apos;, 614),
+ (u&apos;jaar&apos;, 482),
+ (u&apos;den&apos;, 455),
+ (u&apos;land&apos;, 331),
+ (u&apos;maatregel&apos;, 230),
+ (u&apos;ontwikkeling&apos;, 227),
+ (u&apos;nederland&apos;, 222),
+ (u&apos;belang&apos;, 213),
+ (u&apos;aandacht&apos;, 198),
+ (u&apos;wet&apos;, 172),
+ (u&apos;zorg&apos;, 165),
+ (u&apos;verbetering&apos;, 164),
+ (u&apos;staten-generaal&apos;, 163),
+ (u&apos;toestand&apos;, 159),
+ (u&apos;beleid&apos;, 159),
+ (u&apos;edel&apos;, 151),
+ (u&apos;samenwerking&apos;, 148),
+ (u&apos;onderwijs&apos;, 139),
+ (u&apos;deel&apos;, 138),
+ (u&apos;middeel&apos;, 137)]</pre>
 </div>
 
 </div>
@@ -571,8 +624,9 @@ Taalgebruik verandert met de tijd</p>
     <section>
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input_hidden">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="k">def</span> <span class="nf">pars2cooccurance</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
@@ -583,7 +637,7 @@ Taalgebruik verandert met de tijd</p>
     <span class="k">return</span> <span class="n">Counter</span><span class="p">(</span><span class="n">pairs</span><span class="p">)</span>
 
 
-<span class="o">%</span> <span class="n">time</span> <span class="n">coOccuringNouns</span><span class="o">=</span> <span class="p">{</span><span class="n">y</span><span class="p">:</span><span class="n">pars2cooccurance</span><span class="p">(</span><span class="n">Nounstroonredes</span><span class="p">[</span><span class="n">y</span><span class="p">])</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">Nounstroonredes</span><span class="p">}</span>
+<span class="n">coOccuringNouns</span><span class="o">=</span> <span class="p">{</span><span class="n">y</span><span class="p">:</span><span class="n">pars2cooccurance</span><span class="p">(</span><span class="n">Nounstroonredes</span><span class="p">[</span><span class="n">y</span><span class="p">])</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">Nounstroonredes</span><span class="p">}</span>
 
 <span class="c">#Co-occurence and word appearance per 10 years</span>
 <span class="n">jaren</span> <span class="o">=</span> <span class="mi">1818</span>
@@ -634,6 +688,8 @@ Taalgebruik verandert met de tijd</p>
 <span class="c">#How often 2 term have co-occured over all time</span>
 <span class="n">totalCounted</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
 
+<span class="k">print</span> <span class="s">&quot;Meest voorkomende woorden per periode en hun percentuele voorkomen tegenover alle troonredes&quot;</span>
+
 <span class="c">#for the first 10 years the 15 most used words</span>
 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">wordsper10</span><span class="p">)):</span>
     <span class="k">print</span> <span class="s">&quot;Dit is van periode:&quot;</span><span class="p">,</span><span class="n">years</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s">&#39;0&#39;</span><span class="p">)],</span><span class="s">&#39;-&#39;</span><span class="p">,</span><span class="n">years</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s">&#39;0&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">10</span><span class="p">]</span>
@@ -651,13 +707,15 @@ Taalgebruik verandert met de tijd</p>
 </div>
 </div>
 
+</div>
+
 <div class="output_wrapper">
 <div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Wall time: 419 ms
+<pre>Meest voorkomende woorden per periode en hun percentuele voorkomen tegenover alle troonredes
 Dit is van periode: 1818 - 1829
 
 den : 19.0697674419
@@ -863,16 +921,16 @@ belang : 17.4358974359
 </div>
 </div>
 
-</div></section>
-    </section><section>
-    <section>
+</div><div class="fragment" data-fragment-index="11">
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input_hidden">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c">#From the 5 most appearing words in 10 years their 5 most common co-occurences (Over the last 10 years)</span>
+<span class="k">print</span> <span class="s">&quot;Van de laatste 10 jaar de 5 meest voorkomende woorden en hun hoogste co-occurences&quot;</span>
 <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">testing</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">Counter</span><span class="p">(</span><span class="n">wordsper10</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
@@ -895,13 +953,16 @@ belang : 17.4358974359
 </div>
 </div>
 
+</div>
+
 <div class="output_wrapper">
 <div class="output">
 
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>
+<pre>Van de laatste 10 jaar de 5 meest voorkomende woorden en hun hoogste co-occurences
+
 regering
 (u&apos;regering-ruimte&apos;, 10)
 (u&apos;regering-vorm&apos;, 9)
@@ -943,16 +1004,19 @@ samenleving
 </div>
 </div>
 
-</div></section>
+</div>
+    </div></section>
     </section><section>
     <section>
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input_hidden">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="c">#For the total co-occurence a dataframe</span>
+<div class=" highlight hl-ipython2"><pre><span class="k">print</span> <span class="s">&quot;Dataframe van co-occurences over alle troonredes:&quot;</span>
+<span class="c">#For the total co-occurence a dataframe</span>
 <span class="n">coOccurenceDict</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">totalCounted</span><span class="o">.</span><span class="n">most_common</span><span class="p">():</span>
     <span class="n">coOccurenceDict</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -965,11 +1029,20 @@ samenleving
 </div>
 </div>
 
+</div>
+
 <div class="output_wrapper">
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[12]:</div>
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Dataframe van co-occurences over alle troonredes:
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[18]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -1097,6 +1170,7 @@ samenleving
     <section>
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input_hidden">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
@@ -1116,6 +1190,8 @@ samenleving
 
 </div>
 </div>
+</div>
+
 </div>
 
 <div class="output_wrapper">
